@@ -2,12 +2,11 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>REST test test...</title>
+<title>REST test test</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
 
-<!-- Le styles -->
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
 <link href="debug.css" rel="stylesheet">
@@ -53,7 +52,6 @@
 				<div class="span3">
 					<div class="control-group">
 						<div class="controls">
-							<!-- <textarea class="input-xlarge realinputvalue" rows="2"></textarea>-->
 							<input type="text" class="input-xlarge realinputvalue" value="">
 						</div>
 					</div>
@@ -68,12 +66,10 @@
 				<a class="btn btn-navbar" data-toggle="collapse"
 					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
 					class="icon-bar"></span> <span class="icon-bar"></span>
-				</a> <a class="brand" href="#">REST test test...</a>
+				</a> <a class="brand" href="#">REST test test</a>
 				<div class="nav-collapse">
 					<ul class="nav">
-						<li><a target="_blank" href="https://github.com/jeroenooms/resttesttest">Source Code</a></li>
-						<li><a target="_blank" href="https://github.com/jeroenooms/resttesttest/issues/new">Submit Bug</a></li>
-						<li><a target="_blank" href="http://jeroenooms.github.io">Author</a></li>
+
 					</ul>
 				</div>
 				<!--/.nav-collapse -->
@@ -100,7 +96,7 @@
 										<select class="input-small" id="httpmethod">
 											<option>GET</option>
 											<option>POST</option>
-  											<option>OPTIONS</option>
+											<option>PATCH</option>
 											<option>PUT</option>
 											<option>DELETE</option>
 											<option>HEAD</option>
@@ -114,7 +110,7 @@
 									<label class="control-label" for="urlvalue">Endpoint</label>
 									<div class="controls">
 										<input type="text" class="input-xlarge" id="urlvalue"
-											value="https://public.opencpu.org/ocpu/library/">
+										value="http://httpbin.org/headers">
 									</div>
 								</div>
 							</div>
@@ -142,17 +138,20 @@
 						</div>
 
 						<div align="left">
-							<button id="addprambutton" class="btn btn-primary">
+							<button type="button" id="addprambutton" class="btn btn-primary">
 								<i class="icon-plus icon-white"></i> Add parameter
 							</button>
-							<button id="addfilebutton" class="btn btn-primary">
+							<button type="button" id="addfilebutton" class="btn btn-primary">
 								<i class="icon-file icon-white"></i> Add file
 							</button>
+							<button type="button" id="resetfilebutton" class="btn btn-primary">
+                                <i class="icon-remove icon-white"></i> Reset
+                            </button>
 						</div>
 						<br />
 
 						<div align="right">
-							<button id="submitajax" class="btn btn-success btn-large">
+							<button type="submit" id="submitajax" class="btn btn-success btn-large">
 								<i class="icon-download-alt icon-white"></i> Ajax request
 							</button>
 							<img src="spinner.gif" id="ajaxspinner" />
@@ -166,7 +165,18 @@
 					<a class="close" data-dismiss="alert">&times;</a> <strong>Welcome!</strong>
           Use this simple page to poke around at the API.
           Specify HTTP method, URL and parameters, and click on <b>Ajax Request</b>.
-          Note that this page requires a browser with HTML5 support.
+          This page is based on <a target="_blank" href="http://jeroenooms.github.io/">Jeroen's</a>
+                REST Test Test <a target="_blank" href="https://github.com/jeroenooms/resttesttest">code</a>. Here are some frequently-used queries:
+                <p>
+                    <ul>
+                    <li><a href="#" onclick="initForm('POST', 'http://httpbin.org/post', { username: 'user', password: 'xyz' })">POST http://httpbin.org/post</a></li>
+                    <li><a href="#" onclick="initForm('PATCH', 'http://httpbin.org/patch', { name: 'new_name', city: 'San Francisco', state: 'CA' })">PATCH http://httpbin.org/patch</a></li>
+                    <li><a href="#" onclick="initForm('PUT', 'http://httpbin.org/put', { name: 'new_name' })">PUT http://httpbin.org/put</a></li>
+                    <li><a href="#" onclick="initForm('DELETE', 'http://httpbin.org/delete', { id: 2 })">DELETE 
+                    http://httpbin.org/delete</a></li>
+                    <li><a href="#" onclick="initForm('GET', 'https://public.opencpu.org/ocpu/library/', { })">GET https://public.opencpu.org/ocpu/library/</a></li>
+                    </ul>
+                </p>
 				</div>
 
 			</div>
@@ -175,6 +185,8 @@
 				<div id="ajaxoutput">
 					<pre id="statuspre">0</pre>
 					<pre class="pre-scrollable prettyprint linenums" id="outputpre"></pre>
+                    <iframe class="pre-scrollable prettyprint linenums" id="outputiframe"></iframe>
+                    <img id="outputimg" />
 					<pre class="pre-scrollable prettyprint linenums" id="headerpre"></pre>
 				</div>
 			</div>
